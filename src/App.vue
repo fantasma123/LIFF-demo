@@ -23,7 +23,7 @@
 
 <script>
 import liff from "@line/liff";
-import ref from "vue";
+import { ref } from 'vue';
 
 const items = ref([
   {label:"liff.getOS()", getOS},
@@ -31,7 +31,6 @@ const items = ref([
   {label:"liff.getVersion()", getVersion},
   {label:"liff.getLineVersion()", getLineVersion},
   {label:"liff.isInClient()", isInClient},
-  {label:"liff.closeWindow()", closeWindow},
   {label:"liff.use()", use}
 ])
 let getOS = "";
