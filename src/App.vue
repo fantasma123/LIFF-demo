@@ -69,8 +69,8 @@ export default {
   </button>
   <br/>
   <ul>
-    <li v-for="({id, label}, index) in items" :key="id">
-      {{label}} :
+    <li v-for="({id, label, value}, index) in items" :key="id">
+      {{index}}. {{label}} : {{value}}
     </li>
   </ul>
 </template>
