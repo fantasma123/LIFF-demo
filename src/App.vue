@@ -18,10 +18,29 @@
     Liff start
   </button>
   <br/>
+
 </template>
 
 <script>
 import liff from "@line/liff";
+import ref from "vue";
+
+const items = ref([
+  {label:"liff.getOS()", getOS},
+  {label:"liff.getLanguage()", getLanguage},
+  {label:"liff.getVersion()", getVersion},
+  {label:"liff.getLineVersion()", getLineVersion},
+  {label:"liff.isInClient()", isInClient},
+  {label:"liff.closeWindow()", closeWindow},
+  {label:"liff.use()", use}
+])
+let getOS = "";
+let getLanguage = "";
+let getVersion = "";
+let getLineVersion = "";
+let isInClient = "";
+let closeWindow = "";
+let use = "";
 
 export default {
   data() {
@@ -40,6 +59,12 @@ export default {
       }).then(() => {
         this.message = "LIFF init succeeded.";
         this.error = "";
+        getOS = liff.getOS();
+        getLanguage = liff.getLanguage();
+        getVersion = liff.getVersion();
+        getLineVersion = liff.getLineVersion();
+        isInClient = liff.isInClient();
+        use = liff.use();
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
