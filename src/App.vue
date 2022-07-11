@@ -18,28 +18,31 @@
     Liff start
   </button>
   <br/>
-
+  <ul>
+    <li v-for="({id, label, value}, index) in items" :key="id">
+      {{index}}. {{label}} : {{value}}
+    </li>
+  </ul>
 </template>
 
 <script>
 import liff from "@line/liff";
 import { ref } from 'vue';
 
-const items = ref([
-  {label:"liff.getOS()", getOS},
-  {label:"liff.getLanguage()", getLanguage},
-  {label:"liff.getVersion()", getVersion},
-  {label:"liff.getLineVersion()", getLineVersion},
-  {label:"liff.isInClient()", isInClient},
-  {label:"liff.use()", use}
-])
 let getOS = "";
 let getLanguage = "";
 let getVersion = "";
 let getLineVersion = "";
 let isInClient = "";
-let closeWindow = "";
 let use = "";
+let items = ref([
+  {id: 1, label: "liff.getOS()", value: getOS},
+  {id: 2, label: "liff.getLanguage()", value: getLanguage},
+  {id: 3, label: "liff.getVersion()", value: getVersion},
+  {id: 4, label: "liff.getLineVersion()", value: getLineVersion},
+  {id: 5, label: "liff.isInClient()", value: isInClient},
+  {id: 6, label: "liff.use()", value: use}
+]);
 
 export default {
   data() {
