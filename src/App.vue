@@ -1,30 +1,3 @@
-<template>
-  <div>
-    <h1>create-liff-app</h1>
-    <p v-if="message">{{ message }}</p>
-    <p v-if="error">
-      <code>{{ error }}</code>
-    </p>
-    <a href="https://developers.line.biz/ja/docs/liff/" target="_blank" rel="noreferrer">
-      LIFF Documentation
-    </a>
-    <div>
-      <label>LIFF ID: 1657285117-Oxgok63m</label>
-    </div>
-  </div>
-  <br/>
-  <input v-model="liffId" type="text" placeholder="LIFF ID">
-  <button v-on:click="liffStart(liffId)">
-    Liff start
-  </button>
-  <br/>
-  <ul>
-    <li v-for="({id, label, value}, index) in items" :key="id">
-      {{index}}. {{label}} : {{value}}
-    </li>
-  </ul>
-</template>
-
 <script>
 import liff from "@line/liff";
 import { ref } from 'vue';
@@ -75,6 +48,35 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div>
+    <h1>create-liff-app</h1>
+    <p v-if="message">{{ message }}</p>
+    <p v-if="error">
+      <code>{{ error }}</code>
+    </p>
+    <a href="https://developers.line.biz/ja/docs/liff/" target="_blank" rel="noreferrer">
+      LIFF Documentation
+    </a>
+    <div>
+      <label>LIFF ID: 1657285117-Oxgok63m</label>
+    </div>
+  </div>
+  <br/>
+  <input v-model="liffId" type="text" placeholder="LIFF ID">
+  <button v-on:click="liffStart(liffId)">
+    Liff start
+  </button>
+  <br/>
+  <ul>
+    <li v-for="({id, label, value}, index) in items" :key="id">
+      {{index}}. {{label}} : {{value}}
+    </li>
+  </ul>
+</template>
+
+
 
 <style>
 #app {
