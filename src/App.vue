@@ -39,6 +39,7 @@ export default {
         getLineVersion = liff.getLineVersion();
         isInClient = liff.isInClient();
         use = liff.use();
+        this.defaultData.items;
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
