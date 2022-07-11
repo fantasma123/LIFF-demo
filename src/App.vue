@@ -34,15 +34,17 @@ export default {
   mounted() {
 
   },
-  liffStart(liffId) {
-    liff.init({
-      liffId: liffId
-    }).then(() => {
-      this.message = "LIFF init succeeded.";
-    }).catch((e) => {
-      this.message = "LIFF init failed.";
-      this.error = `${e}`;
-    });
+  methods: {
+    liffStart: function (liffId) {
+      liff.init({
+        liffId: liffId
+      }).then(() => {
+        this.message = "LIFF init succeeded.";
+      }).catch((e) => {
+        this.message = "LIFF init failed.";
+        this.error = `${e}`;
+      });
+    }
   }
 };
 </script>
