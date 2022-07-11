@@ -1,6 +1,5 @@
 <script>
 import liff from "@line/liff";
-import { ref } from 'vue';
 
 let getOS = "";
 let getLanguage = "";
@@ -8,20 +7,20 @@ let getVersion = "";
 let getLineVersion = "";
 let isInClient = "";
 let use = "";
-const items = ref([
-  {id: 1, label: "liff.getOS()"},
-  {id: 2, label: "liff.getLanguage()"},
-  {id: 3, label: "liff.getVersion()"},
-  {id: 4, label: "liff.getLineVersion()"},
-  {id: 5, label: "liff.isInClient()"},
-  {id: 6, label: "liff.use()"}
-]);
 
 export default {
   data() {
     return {
       message: "",
-      error: ""
+      error: "",
+      items: ([
+        {id: 1, label: "liff.getOS()"},
+        {id: 2, label: "liff.getLanguage()"},
+        {id: 3, label: "liff.getVersion()"},
+        {id: 4, label: "liff.getLineVersion()"},
+        {id: 5, label: "liff.isInClient()"},
+        {id: 6, label: "liff.use()"}
+      ])
     };
   },
   mounted() {
@@ -71,7 +70,7 @@ export default {
   <br/>
   <ul>
     <li v-for="({id, label}, index) in items" :key="id">
-      {{index}}. {{label}}
+      {{label}} :
     </li>
   </ul>
 </template>
