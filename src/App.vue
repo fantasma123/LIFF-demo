@@ -9,10 +9,20 @@
       LIFF Documentation
     </a>
   </div>
+  <br/>
+  <input v-model="liffId" type="text" placeholder="LIFF ID">
+  <button v-on:click="liffStart(liffId)">
+    Liff start
+  </button>
+  <br/>
+  {{liffId}}
 </template>
 
 <script>
 import liff from "@line/liff";
+import {ref} from 'vue'
+
+const liffId = ref("1657285117-Oxgok63m");
 
 export default {
   data() {
@@ -22,17 +32,17 @@ export default {
     };
   },
   mounted() {
-    liff
-      .init({
-        liffId: '1657285117-Oxgok63m'
-      })
-      .then(() => {
-        this.message = "LIFF init succeeded.";
-      })
-      .catch((e) => {
-        this.message = "LIFF init failed.";
-        this.error = `${e}`;
-      });
+
+  },
+  liffStart(liffId) {
+    liff.init({
+      liffId: liffId
+    }).then(() => {
+      this.message = "LIFF init succeeded.";
+    }).catch((e) => {
+      this.message = "LIFF init failed.";
+      this.error = `${e}`;
+    });
   }
 };
 </script>
