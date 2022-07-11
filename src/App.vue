@@ -24,7 +24,7 @@ export default {
   mounted() {
     liff
       .init({
-        liffId: import.meta.env.VITE_LIFF_ID
+        liffId: '1657285117-Oxgok63m'
       })
       .then(() => {
         this.message = "LIFF init succeeded.";
