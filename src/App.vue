@@ -8,13 +8,13 @@ let getVersion = "";
 let getLineVersion = "";
 let isInClient = "";
 let use = "";
-let items = ref([
-  {id: 1, label: "liff.getOS()", value: getOS},
-  {id: 2, label: "liff.getLanguage()", value: getLanguage},
-  {id: 3, label: "liff.getVersion()", value: getVersion},
-  {id: 4, label: "liff.getLineVersion()", value: getLineVersion},
-  {id: 5, label: "liff.isInClient()", value: isInClient},
-  {id: 6, label: "liff.use()", value: use}
+const items = ref([
+  {id: 1, label: "liff.getOS()"},
+  {id: 2, label: "liff.getLanguage()"},
+  {id: 3, label: "liff.getVersion()"},
+  {id: 4, label: "liff.getLineVersion()"},
+  {id: 5, label: "liff.isInClient()"},
+  {id: 6, label: "liff.use()"}
 ]);
 
 export default {
