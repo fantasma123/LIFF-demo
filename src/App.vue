@@ -129,4 +129,7 @@ export default {
   width: 200px;
   padding: 0 0 0 200px;
 }
+.divApi span{
+  text-align: left;
+}
 </style>
