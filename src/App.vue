@@ -1,18 +1,21 @@
 <script>
 import liff from "@line/liff";
 
-let getOS = "";
-let getLanguage = "";
-let getVersion = "";
-let getLineVersion = "";
-let isInClient = "";
-let use = "";
+
 
 export default {
   data() {
     return {
       message: "",
-      error: ""
+      error: "",
+      items: {
+        getOS: "",
+        getLanguage: "",
+        getVersion: "",
+        getLineVersion: "",
+        isInClient: "",
+        use: ""
+      }
     };
   },
   mounted() {
@@ -25,12 +28,12 @@ export default {
       }).then(() => {
         this.message = "LIFF init succeeded.";
         this.error = "";
-        getOS = liff.getOS();
-        getLanguage = liff.getLanguage();
-        getVersion = liff.getVersion();
-        getLineVersion = liff.getLineVersion();
-        isInClient = liff.isInClient();
-        use = liff.use();
+        this.items.getOS = liff.getOS();
+        this.items.getLanguage = liff.getLanguage();
+        this.items.getVersion = liff.getVersion();
+        this.items.getLineVersion = liff.getLineVersion();
+        this.items.isInClient = liff.isInClient();
+        this.items.use = liff.use();
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
@@ -60,18 +63,20 @@ export default {
     Liff start
   </button>
   <br/>
+  <div style="position: relative">
   <div class="divApi"><span>1. liff.getOS()</span><button v-on:click="liff.getOS()">RUN</button></div>
-  <span>Response</span><input v-model="getOS" type="text"/>
+  <span>Response</span><input v-model="items.getOS" type="text"/>
   <div class="divApi"><span>2. liff.getLanguage()</span><button v-on:click="liff.getLanguage()">RUN</button></div>
-  <span>Response</span><input v-model="getLanguage" type="text"/>
+  <span>Response</span><input v-model="items.getLanguage" type="text"/>
   <div class="divApi"><span>3. liff.getVersion()</span><button v-on:click="liff.getVersion()">RUN</button></div>
-  <span>Response</span><input v-model="getVersion" type="text"/>
+  <span>Response</span><input v-model="items.getVersion" type="text"/>
   <div class="divApi"><span>4. liff.getLineVersion()</span><button v-on:click="liff.getLineVersion()">RUN</button></div>
-  <span>Response</span><input v-model="getLineVersion" type="text"/>
+  <span>Response</span><input v-model="items.getLineVersion" type="text"/>
   <div class="divApi"><span>5. liff.isInClient()</span><button v-on:click="liff.isInClient()">RUN</button></div>
-  <span>Response</span><input v-model="isInClient" type="text"/>
+  <span>Response</span><input v-model="items.isInClient" type="text"/>
   <div class="divApi"><span>6. liff.use()</span><button v-on:click="liff.use()">RUN</button></div>
-  <span>Response</span><input v-model="use" type="text"/>
+  <span>Response</span><input v-model="items.use" type="text"/>
+  </div>
 
 </template>
 
@@ -85,5 +90,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.divApi{
+  width: 200px;
+  padding: 0 0 0 200px;
 }
 </style>
