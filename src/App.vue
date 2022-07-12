@@ -12,15 +12,7 @@ export default {
   data() {
     return {
       message: "",
-      error: "",
-      items: ([
-        {id: 1, label: "liff.getOS()", value: getOS},
-        {id: 2, label: "liff.getLanguage()", value: getLanguage},
-        {id: 3, label: "liff.getVersion()", value: getVersion},
-        {id: 4, label: "liff.getLineVersion()", value: getLineVersion},
-        {id: 5, label: "liff.isInClient()", value: isInClient},
-        {id: 6, label: "liff.use()", value: use}
-      ])
+      error: ""
     };
   },
   mounted() {
@@ -39,7 +31,6 @@ export default {
         getLineVersion = liff.getLineVersion();
         isInClient = liff.isInClient();
         use = liff.use();
-        this.defaultData.items;
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
@@ -64,16 +55,24 @@ export default {
     </div>
   </div>
   <br/>
-  <input v-model="liffId" type="text" placeholder="LIFF ID">
+  <input v-model="liffId" type="text" placeholder="LIFF ID"/>
   <button v-on:click="liffStart(liffId)">
     Liff start
   </button>
   <br/>
-  <ul>
-    <li v-for="({id, label, value}, index) in items" :key="id">
-      {{index}}. {{label}} : {{value}}
-    </li>
-  </ul>
+  <div class="divApi"><span>1. liff.getOS()</span><button v-on:click="liff.getOS()">RUN</button></div>
+  <span>Response</span><input v-model="getOS" type="text"/>
+  <div class="divApi"><span>2. liff.getLanguage()</span><button v-on:click="liff.getLanguage()">RUN</button></div>
+  <span>Response</span><input v-model="getLanguage" type="text"/>
+  <div class="divApi"><span>3. liff.getVersion()</span><button v-on:click="liff.getVersion()">RUN</button></div>
+  <span>Response</span><input v-model="getVersion" type="text"/>
+  <div class="divApi"><span>4. liff.getLineVersion()</span><button v-on:click="liff.getLineVersion()">RUN</button></div>
+  <span>Response</span><input v-model="getLineVersion" type="text"/>
+  <div class="divApi"><span>5. liff.isInClient()</span><button v-on:click="liff.isInClient()">RUN</button></div>
+  <span>Response</span><input v-model="isInClient" type="text"/>
+  <div class="divApi"><span>6. liff.use()</span><button v-on:click="liff.use()">RUN</button></div>
+  <span>Response</span><input v-model="use" type="text"/>
+
 </template>
 
 
