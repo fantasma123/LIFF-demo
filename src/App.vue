@@ -2,7 +2,6 @@
 import liff from "@line/liff";
 
 
-
 export default {
   data() {
     return {
@@ -63,23 +62,57 @@ export default {
     Liff start
   </button>
   <br/>
-  <div style="position: relative">
-  <div class="divApi"><span>1. liff.getOS()</span><button v-on:click="liff.getOS()">RUN</button></div>
-  <span>Response</span><input v-model="items.getOS" type="text"/>
-  <div class="divApi"><span>2. liff.getLanguage()</span><button v-on:click="liff.getLanguage()">RUN</button></div>
-  <span>Response</span><input v-model="items.getLanguage" type="text"/>
-  <div class="divApi"><span>3. liff.getVersion()</span><button v-on:click="liff.getVersion()">RUN</button></div>
-  <span>Response</span><input v-model="items.getVersion" type="text"/>
-  <div class="divApi"><span>4. liff.getLineVersion()</span><button v-on:click="liff.getLineVersion()">RUN</button></div>
-  <span>Response</span><input v-model="items.getLineVersion" type="text"/>
-  <div class="divApi"><span>5. liff.isInClient()</span><button v-on:click="liff.isInClient()">RUN</button></div>
-  <span>Response</span><input v-model="items.isInClient" type="text"/>
-  <div class="divApi"><span>6. liff.use()</span><button v-on:click="liff.use()">RUN</button></div>
-  <span>Response</span><input v-model="items.use" type="text"/>
-  </div>
-
+  <table>
+    <tr>
+      <td>
+        <div class="divApi"><span>1. liff.getOS()</span>
+          <button v-on:click="liff.getOS()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.getOS" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>2. liff.getLanguage()</span>
+          <button v-on:click="liff.getLanguage()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.getLanguage" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>3. liff.getVersion()</span>
+          <button v-on:click="liff.getVersion()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.getVersion" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>4. liff.getLineVersion()</span>
+          <button v-on:click="liff.getLineVersion()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.getLineVersion" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>5. liff.isInClient()</span>
+          <button v-on:click="liff.isInClient()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.isInClient" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>6. liff.use()</span>
+          <button v-on:click="liff.use()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.use" type="text"/></td>
+    </tr>
+  </table>
 </template>
-
 
 
 <style>
@@ -91,7 +124,8 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.divApi{
+
+.divApi {
   width: 200px;
   padding: 0 0 0 200px;
 }
