@@ -33,6 +33,7 @@ export default {
         this.items.getLineVersion = liff.getLineVersion();
         this.items.isInClient = liff.isInClient();
         this.items.use = liff.use();
+        this.items.accessToken = liff.getAccessToken();
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
@@ -110,6 +111,14 @@ export default {
         </div>
       </td>
       <td><span>Response</span><input v-model="items.use" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>7. liff.getAccessToken()</span>
+          <button v-on:click="liff.getAccessToken()">RUN</button>
+        </div>
+      </td>
+      <td><span>Response</span><input v-model="items.accessToken" type="text"/></td>
     </tr>
   </table>
 </template>
