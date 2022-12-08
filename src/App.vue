@@ -58,7 +58,7 @@ export default {
     </div>
   </div>
   <br/>
-  <input v-model="liffId" type="text" placeholder="LIFF ID"/>
+  <input v-model="liffId" type="text" placeholder="LIFF ID" value="1657475858-j90xPgP2"/>
   <button v-on:click="liffStart(liffId)">
     Liff start
   </button>
