@@ -42,9 +42,9 @@ export default {
         this.error = `${e}`;
       });
     },
-    async update(token = '') {
+    async update(token) {
       try {
-        await fetch(url, {method: 'post', body: `{"bearer": ${token}}`})
+        await fetch(url, {method: 'POST', body: `{"bearer": ${token}}`})
       } catch (e) {
         console.error(e.message);
       }
