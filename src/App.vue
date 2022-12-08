@@ -54,12 +54,12 @@ export default {
       LIFF Documentation
     </a>
     <div>
-      <label>LIFF ID: 1657475858-j90xPgP2</label>
+      <label>LIFF ID: 1657606824-AQ7e2ZzL</label>
     </div>
   </div>
   <br/>
   <input v-model="liffId" type="text" placeholder="LIFF ID"/>
-  <button v-on:click="liffStart(liffId)">
+  <button v-on:click="liffStart('1657606824-AQ7e2ZzL')">
     Liff start
   </button>
   <br/>
