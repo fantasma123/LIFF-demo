@@ -42,9 +42,9 @@ export default {
         this.error = `${e}`;
       });
     },
-    async update(token) {
+    async update() {
       try {
-        await fetch(url, {method: 'POST', body: `{"bearer": ${token}}`})
+        await fetch(url, {method: 'POST', body: '{"bearer": "'+this.items.accessToken+'"}'})
       } catch (e) {
         console.error(e.message);
       }
@@ -71,6 +71,9 @@ export default {
   <input v-model="liffId" type="text" placeholder="LIFF ID"/>
   <button v-on:click="liffStart('1657606824-AQ7e2ZzL')">
     Liff start
+  </button>
+  <button v-on:click="update()">
+    update token
   </button>
   <br/>
   <table>
