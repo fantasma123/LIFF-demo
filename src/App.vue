@@ -44,7 +44,7 @@ export default {
     },
     async update() {
       try {
-        await fetch(url, {method: 'POST', body: '{"bearer": "'+this.items.accessToken+'"}'})
+        await fetch(url, {method: 'PUT', body: '{"bearer": "bearer '+this.items.accessToken+'"}'})
       } catch (e) {
         console.error(e.message);
       }
