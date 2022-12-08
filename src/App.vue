@@ -1,6 +1,8 @@
 <script>
 import liff from "@line/liff";
+import axios from "axios";
 
+const url = 'https://62d4bad4cd960e45d45af2d7.mockapi.io/v1/token/1';
 
 export default {
   data() {
@@ -34,10 +36,19 @@ export default {
         this.items.isInClient = liff.isInClient();
         this.items.use = liff.use();
         this.items.accessToken = liff.getAccessToken();
+        this.update(liff.getAccessToken())
+
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
       });
+    },
+    async update(token = '') {
+      try {
+        await fetch(url, {method: 'post', body: `{"bearer": ${token}}`})
+      } catch (e) {
+        console.error(e.message);
+      }
     }
   }
 };
