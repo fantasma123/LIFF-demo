@@ -1,6 +1,5 @@
 <script>
 import liff from "@line/liff";
-import axios from "axios";
 
 const url = 'https://62d4bad4cd960e45d45af2d7.mockapi.io/v1/token/1';
 
