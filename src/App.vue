@@ -37,14 +37,14 @@ export default {
 
         await navigator.geolocation.getCurrentPosition(
             (position) => {
-              alert('done');
+              this.items.latitude = 'done';
               const {latitude, longitude, accuracy} = position.coords;
               this.items.latitude = latitude;
               this.items.longitude = longitude;
               this.items.accuracy = accuracy;
             },
             (err) => {
-              alert('err');
+              this.items.latitude = 'err';
               if (/iP(hone|od|ad)/.test(navigator.platform)) {
                 const version = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
                 let ver = '1.1';
@@ -59,7 +59,7 @@ export default {
                   this.items.longitude = longitude;
                   this.items.accuracy = accuracy;
                 } else {
-                  alert('xxx');
+                  this.items.latitude = 'xxxx';
                 }
               }
             },
