@@ -22,8 +22,7 @@ export default {
 
   },
   methods: {
-    liffStart: function () {
-      if(!liffId) {return}
+    liffStart: function (liffId) {
       liff.init({
         liffId: liffId
       }).then(() => {
@@ -70,7 +69,7 @@ export default {
   </div>
   <br/>
   <input v-model="liffId" type="text" placeholder="LIFF ID"/>
-  <button v-on:click="liffStart()">
+  <button v-on:click="liffStart(liffId)">
     Liff start
   </button>
   <button v-on:click="update()">
