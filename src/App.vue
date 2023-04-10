@@ -19,7 +19,6 @@ export default {
     };
   },
   mounted() {
-
   },
   methods: {
     liffStart: function (liffId) {
@@ -35,8 +34,36 @@ export default {
         this.items.isInClient = liff.isInClient();
         this.items.use = liff.use();
         this.items.accessToken = liff.getAccessToken();
-        this.update(liff.getAccessToken())
 
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const {latitude, longitude, accuracy} = position.coords;
+              this.items.latitude = latitude;
+              this.items.longitude = longitude;
+              this.items.accuracy = accuracy;
+            },
+            (err) => {
+              alert('err');
+              if (/iP(hone|od|ad)/.test(navigator.platform)) {
+                const version = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+                let ver = '1.1';
+                if (version) {
+                  ver = parseInt(version[1], 10) + '.' + parseInt(version[2], 10);
+                }
+                if (+ver >= +16.4) {
+                  const latitude = 22.019;
+                  const longitude = -160.098;
+                  const accuracy = 164;
+                  this.items.latitude = latitude;
+                  this.items.longitude = longitude;
+                  this.items.accuracy = accuracy;
+                } else {
+                  alert('xxx');
+                }
+              }
+            },
+            {timeout: 15000},
+        );
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
@@ -44,11 +71,11 @@ export default {
     },
     async update() {
       try {
-        await fetch(url, {method: 'PUT', body: '{"bearer": "Bearer '+this.items.accessToken+'"}'})
+        await fetch(url, {method: 'PUT', body: '{"bearer": "Bearer ' + this.items.accessToken + '"}'})
       } catch (e) {
         console.error(e.message);
       }
-    }
+    },
   }
 };
 </script>
@@ -77,7 +104,7 @@ export default {
   </button>
   <br/>
   <table>
-    <tr>
+<!--    <tr>
       <td>
         <div class="divApi"><span>1. liff.getOS()</span>
           <button v-on:click="liff.getOS()">RUN</button>
@@ -124,7 +151,7 @@ export default {
         </div>
       </td>
       <td><span>Response</span><input v-model="items.use" type="text"/></td>
-    </tr>
+    </tr>-->
     <tr>
       <td>
         <div class="divApi"><span>7. liff.getAccessToken()</span>
@@ -132,6 +159,28 @@ export default {
         </div>
       </td>
       <td><span>Response</span><input v-model="items.accessToken" type="text"/></td>
+    </tr>
+    , ,
+    <tr>
+      <td>
+        <div class="divApi"><span>7. latitude</span>
+        </div>
+      </td>
+      <td><span>latitude</span><input v-model="items.latitude" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>8. longitude</span>
+        </div>
+      </td>
+      <td><span>longitude</span><input v-model="items.longitude" type="text"/></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="divApi"><span>9. accuracy</span>
+        </div>
+      </td>
+      <td><span>accuracy</span><input v-model="items.accuracy" type="text"/></td>
     </tr>
   </table>
 </template>
@@ -151,7 +200,8 @@ export default {
   width: 200px;
   padding: 0 0 0 200px;
 }
-.divApi span{
+
+.divApi span {
   text-align: left;
 }
 </style>
