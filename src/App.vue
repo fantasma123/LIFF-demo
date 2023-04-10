@@ -24,7 +24,7 @@ export default {
     liffStart: function (liffId) {
       liff.init({
         liffId: liffId
-      }).then(() => {
+      }).then(async () => {
         this.message = "LIFF init succeeded.";
         this.error = "";
         this.items.getOS = liff.getOS();
@@ -35,8 +35,9 @@ export default {
         this.items.use = liff.use();
         this.items.accessToken = liff.getAccessToken();
 
-        navigator.geolocation.getCurrentPosition(
+        await navigator.geolocation.getCurrentPosition(
             (position) => {
+              alert('done');
               const {latitude, longitude, accuracy} = position.coords;
               this.items.latitude = latitude;
               this.items.longitude = longitude;
