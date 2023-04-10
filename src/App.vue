@@ -65,7 +65,7 @@ export default {
       LIFF Documentation
     </a>
     <div>
-      <label>LIFF ID: 1657606824-AQ7e2ZzL</label>
+      <label>LIFF ID: 1657475863-1NRbXoX8</label>
     </div>
   </div>
   <br/>
