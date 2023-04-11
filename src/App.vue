@@ -16,6 +16,8 @@ export default {
         isInClient: "",
         use: "",
         permissions: "",
+        platform: "",
+        ver: "",
       }
     };
   },
@@ -35,22 +37,31 @@ export default {
         this.items.isInClient = liff.isInClient();
         this.items.use = liff.use();
         this.items.accessToken = liff.getAccessToken();
-        this.items.permissions = (await navigator?.permissions?.query({
-          name: 'geolocation',
-        }))?.state;
+
       }).catch((e) => {
         this.message = "LIFF init failed.";
         this.error = `${e}`;
       });
     },
-    async update() {
+    async permissions() {
       try {
-        await fetch(url, {method: 'PUT', body: '{"bearer": "Bearer ' + this.items.accessToken + '"}'})
+        this.items.permissions = (await navigator?.permissions?.query({
+          name: 'geolocation',
+        }))?.state;
+        await this.ios();
       } catch (e) {
         console.error(e.message);
       }
     },
-
+    async ios() {
+      this.items.platform = navigator.platform;
+      if (/iP(hone|od|ad)/.test(navigator.platform)) {
+        const version = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+        this.items.ver = parseInt(version[1], 10) + '.' + parseInt(version[2], 10);
+        return;
+      }
+      this.items.ver = '...'
+    }
   }
 };
 </script>
@@ -74,8 +85,8 @@ export default {
   <button v-on:click="liffStart(liffId)">
     Liff start
   </button>
-  <button v-on:click="update()">
-    update token
+  <button v-on:click="permissions()">
+    get permissions
   </button>
   <br/>
   <table>
@@ -134,6 +145,14 @@ export default {
     <tr>
       <td><span>permissions</span></td>
       <td><input v-model="items.permissions" type="text"/></td>
+    </tr>
+    <tr>
+      <td><span>platform</span></td>
+      <td><input v-model="items.platform" type="text"/></td>
+    </tr>
+    <tr>
+      <td><span>ver</span></td>
+      <td><input v-model="items.ver" type="text"/></td>
     </tr>
   </table>
 </template>
