@@ -52,6 +52,7 @@ export default {
 
       function error(err) {
         document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
+        clearTimeout(timeId);
       }
     }
     check();
