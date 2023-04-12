@@ -24,13 +24,15 @@ export default {
       function getiOSVersion() {
         return parseFloat(
             ('' + (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(navigator.userAgent) || [0, ''])[1])
-                .replace('undefined', '3_2').replace('_', '.').replace('_', '')
+                .replace('undefined', '3_2')
+                .replace('_', '.')
+                .replace('_', '')
         ) || false;
       }
 
       var os = getiOSVersion();
       if (os) {
-        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です";
+        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です" + navigator.userAgent;
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
