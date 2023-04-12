@@ -39,6 +39,7 @@ export default {
       }, 8000);
       var options = {
         enableHighAccuracy: true,
+        timeout: 7000
       }
       navigator.geolocation.getCurrentPosition(success, error, options);
 
