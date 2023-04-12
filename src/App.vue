@@ -35,7 +35,7 @@ export default {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
       var timeId = setTimeout(function () {
-        alert("貴様にスタンプはやらん");
+        // alert("貴様にスタンプはやらん");
       }, 8000);
       var options = {
         enableHighAccuracy: true,
