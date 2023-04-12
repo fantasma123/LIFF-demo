@@ -32,12 +32,12 @@ export default {
 
       var os = getiOSVersion();
       if (os) {
-        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です" + navigator.userAgent;
+        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です";
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
       var timeId = setTimeout(function () {
-        // alert("貴様にスタンプはやらん");
+        alert("貴様にスタンプはやらん");
         document.getElementById('latitude').innerText = 123;
         document.getElementById('longitude').innerText = 123;
       }, 8000);
