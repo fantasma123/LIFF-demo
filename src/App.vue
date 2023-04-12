@@ -38,6 +38,8 @@ export default {
       }
       var timeId = setTimeout(function () {
         // alert("貴様にスタンプはやらん");
+        document.getElementById('latitude').innerText = 123;
+        document.getElementById('longitude').innerText = 123;
       }, 8000);
       var options = {
         enableHighAccuracy: true,
