@@ -1,8 +1,6 @@
 <script>
 import liff from "@line/liff";
 
-const url = 'https://62d4bad4cd960e45d45af2d7.mockapi.io/v1/token/1';
-
 export default {
   data() {
     return {
@@ -22,6 +20,40 @@ export default {
     };
   },
   mounted() {
+    function check() {
+      function getiOSVersion() {
+        return parseFloat(
+            ('' + (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(navigator.userAgent) || [0, ''])[1])
+                .replace('undefined', '3_2').replace('_', '.').replace('_', '')
+        ) || false;
+      }
+
+      var os = getiOSVersion();
+      if (os) {
+        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です";
+      } else {
+        document.getElementById('os_check').innerText = "あなたはAndroidです";
+      }
+      var timeId = setTimeout(function () {
+        alert("貴様にスタンプはやらん");
+      }, 8000);
+      var options = {
+        enableHighAccuracy: true,
+      }
+      navigator.geolocation.getCurrentPosition(success, error, options);
+
+      function success(pos) {
+        var crd = pos.coords;
+        document.getElementById('latitude').innerText = crd.latitude;
+        document.getElementById('longitude').innerText = crd.longitude;
+        clearTimeout(timeId);
+      }
+
+      function error(err) {
+        document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
+      }
+    }
+    check();
   },
   methods: {
     liffStart: function (liffId) {
@@ -155,6 +187,11 @@ export default {
       <td><input v-model="items.ver" type="text"/></td>
     </tr>
   </table>
+  <p id="os_check">OS調査中....</p>
+  <p id="err_msg"></p>
+  <p>latitude：<span id="latitude"></span></p>
+  <p>longitude：<span id="longitude"></span></p>
+
 </template>
 
 
