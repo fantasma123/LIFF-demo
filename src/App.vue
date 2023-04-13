@@ -20,45 +20,32 @@ export default {
     };
   },
   mounted() {
-    function check() {
-      function getiOSVersion() {
-        return parseFloat(
-            ('' + (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(navigator.userAgent) || [0, ''])[1])
-                .replace('undefined', '3_2')
-                .replace('_', '.')
-                .replace('_', '')
-        ) || false;
-      }
+    function getiOSVersion() {
+      return parseFloat(
+          ('' + (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(navigator.userAgent) || [0, ''])[1])
+              .replace('undefined', '3_2')
+              .replace('_', '.')
+              .replace('_', '')
+      ) || false;
+    }
 
+    async function check() {
       var os = getiOSVersion();
       if (os) {
         document.getElementById('os_check').innerText = "あなたはiOS" + os + "です";
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
-      var timeId = setTimeout(function () {
-        alert("貴様にスタンプはやらん");
-        document.getElementById('latitude').innerText = 123;
-        document.getElementById('longitude').innerText = 123;
-      }, 8000);
-      var options = {
-        enableHighAccuracy: true,
-        timeout: 7000
-      }
-      navigator.geolocation.getCurrentPosition(success, error, options);
-
-      function success(pos) {
-        var crd = pos.coords;
-        document.getElementById('latitude').innerText = crd.latitude;
-        document.getElementById('longitude').innerText = crd.longitude;
-        clearTimeout(timeId);
-      }
-
-      function error(err) {
-        document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
-        clearTimeout(timeId);
+      try {
+        var value = await getLocation();
+        document.getElementById('latitude').innerText = value.latitude;
+        document.getElementById('longitude').innerText = value.longitude;
+      } catch (err) {
+        document.getElementById('latitude').innerText = 'xxxx';
+        document.getElementById('longitude').innerText = 'xxxx';
       }
     }
+
     check();
   },
   methods: {
@@ -99,9 +86,42 @@ export default {
         return;
       }
       this.items.ver = '...'
+    },
+    sample: async function () {
+      console.log('a');
+      console.log('waiting...')
+      await delay(3000);
+      console.log('b');
     }
   }
 };
+const delay = (delayInms) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, delayInms);
+    setTimeout(() => {
+      console.log('xx');
+      resolve
+    }, delayInms + 1000);
+  });
+};
+
+const getLocation = async () => {
+  var timeId = setTimeout(function () {
+    alert("貴様にスタンプはやらん");
+    return {latitude: 123, longitude: 123}
+  }, 8000);
+  navigator.geolocation.getCurrentPosition(() => {
+    var crd = pos.coords;
+    return {latitude: crd.latitude, longitude: crd.longitude}
+    clearTimeout(timeId);
+  }, () => {
+    document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
+    clearTimeout(timeId);
+  }, {
+    enableHighAccuracy: true,
+    timeout: 7000
+  });
+}
 </script>
 
 <template>
@@ -125,6 +145,9 @@ export default {
   </button>
   <button v-on:click="permissions()">
     get permissions
+  </button>
+  <button v-on:click="sample()">
+    check Timeout
   </button>
   <br/>
   <table>
