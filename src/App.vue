@@ -41,6 +41,7 @@ export default {
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
       } catch (err) {
+        alert(err)
         document.getElementById('latitude').innerText = 'xxxx';
         document.getElementById('longitude').innerText = 'xxxx';
       }
