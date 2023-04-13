@@ -112,7 +112,7 @@ const getLocation = async () => {
       alert("貴様にスタンプはやらん");
       resolve ({latitude: 123, longitude: 123});
     }, 20000);
-    await navigator.geolocation.getCurrentPosition(() => {
+    navigator.geolocation.getCurrentPosition(() => {
       var crd = pos.coords;
       resolve ({latitude: crd.latitude, longitude: crd.longitude})
       clearTimeout(timeId);
