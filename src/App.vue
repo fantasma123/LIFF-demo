@@ -40,8 +40,7 @@ export default {
         alert(value);
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
-      }).catch((err) => {
-        alert(err?.message)
+      }).catch(() => {
         document.getElementById('latitude').innerText = 'xxxx';
         document.getElementById('longitude').innerText = 'xxxx';
       });
@@ -112,7 +111,7 @@ const getLocation = async () => {
     var timeId = setTimeout(function () {
       alert("貴様にスタンプはやらん");
       resolve ({latitude: 123, longitude: 123});
-    }, 8000);
+    }, 20000);
     await navigator.geolocation.getCurrentPosition(() => {
       var crd = pos.coords;
       resolve ({latitude: crd.latitude, longitude: crd.longitude})
