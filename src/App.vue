@@ -36,15 +36,17 @@ export default {
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
-      try {
-        var value = await getLocation();
+      await getLocation().then((value) => {
+        alert(value);
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
-      } catch (err) {
+      }).catch((err) => {
+
         alert(err)
         document.getElementById('latitude').innerText = 'xxxx';
         document.getElementById('longitude').innerText = 'xxxx';
-      }
+      });
+      alert('end');
     }
 
     check();
