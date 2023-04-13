@@ -41,7 +41,6 @@ export default {
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
       }).catch((err) => {
-
         alert(err)
         document.getElementById('latitude').innerText = 'xxxx';
         document.getElementById('longitude').innerText = 'xxxx';
@@ -109,21 +108,24 @@ const delay = (delayInms) => {
 };
 
 const getLocation = async () => {
-  var timeId = setTimeout(function () {
-    alert("貴様にスタンプはやらん");
-    return {latitude: 123, longitude: 123}
-  }, 8000);
-  await navigator.geolocation.getCurrentPosition(() => {
-    var crd = pos.coords;
-    return {latitude: crd.latitude, longitude: crd.longitude}
-    clearTimeout(timeId);
-  }, () => {
-    document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
-    clearTimeout(timeId);
-  }, {
-    enableHighAccuracy: true,
-    timeout: 7000
-  });
+  return new Promise(async (resolve, reject) => {
+    var timeId = setTimeout(function () {
+      alert("貴様にスタンプはやらん");
+      resolve ({latitude: 123, longitude: 123});
+    }, 8000);
+    await navigator.geolocation.getCurrentPosition(() => {
+      var crd = pos.coords;
+      resolve ({latitude: crd.latitude, longitude: crd.longitude})
+      clearTimeout(timeId);
+    }, (err) => {
+      reject(err);
+      document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
+      clearTimeout(timeId);
+    }, {
+      enableHighAccuracy: true,
+      timeout: 7000
+    });
+  })
 }
 </script>
 
