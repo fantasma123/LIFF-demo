@@ -113,15 +113,16 @@ const getLocation = async () => {
       resolve ({latitude: 123, longitude: 123});
     }, 20000);
     navigator.geolocation.getCurrentPosition(() => {
+      alert("ss");
       var crd = pos.coords;
       resolve ({latitude: crd.latitude, longitude: crd.longitude})
       clearTimeout(timeId);
     }, (err) => {
+      alert("err");
       reject(err);
       document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
       clearTimeout(timeId);
     }, {
-      enableHighAccuracy: true,
       timeout: 7000
     });
   })
