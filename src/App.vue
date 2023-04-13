@@ -109,16 +109,13 @@ const delay = (delayInms) => {
 const getLocation = async () => {
   return new Promise(async (resolve, reject) => {
     var timeId = setTimeout(function () {
-      alert("貴様にスタンプはやらん");
       resolve ({latitude: 123, longitude: 123});
     }, 20000);
     navigator.geolocation.getCurrentPosition((pos) => {
-      alert("ss");
       var crd = pos.coords;
       resolve ({latitude: crd.latitude, longitude: crd.longitude})
       clearTimeout(timeId);
     }, (err) => {
-      alert("err");
       reject(err);
       document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
       clearTimeout(timeId);
