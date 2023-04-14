@@ -36,7 +36,7 @@ export default {
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
-      getLocation().then((value) => {
+      await getLocation().then((value) => {
         alert(value);
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
@@ -126,7 +126,7 @@ const delay = (delayInms) => {
 // }
 const getLocation = () => {
   if (iOSVersion()) {
-    // alert('xx');
+    alert('xx');
   }
   return new Promise((resolve, reject) => {
     const timeId = setTimeout(function () {
