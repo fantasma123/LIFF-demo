@@ -36,7 +36,7 @@ export default {
       } else {
         document.getElementById('os_check').innerText = "あなたはAndroidです";
       }
-      await getLocation().then((value) => {
+      getLocation().then((value) => {
         alert(value);
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
@@ -105,25 +105,78 @@ const delay = (delayInms) => {
     }, delayInms + 1000);
   });
 };
+//
+// const getLocation = async () => {
+//   return new Promise(async (resolve, reject) => {
+//     var timeId = setTimeout(function () {
+//       resolve ({latitude: 123, longitude: 123});
+//     }, 20000);
+//     navigator.geolocation.getCurrentPosition((pos) => {
+//       var crd = pos.coords;
+//       resolve ({latitude: crd.latitude, longitude: crd.longitude})
+//       clearTimeout(timeId);
+//     }, (err) => {
+//       reject(err);
+//       document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
+//       clearTimeout(timeId);
+//     }, {
+//       timeout: 7000
+//     });
+//   })
+// }
+const getLocation = () => {
+  if (iOSVersion()) {
+    // alert('xx');
+  }
+  return new Promise((resolve, reject) => {
+    const timeId = setTimeout(function () {
+      if (iOSVersion()) {
+        resolve({ latitude: 22.019, longitude: -160.098, accuracy: 164 });
+      } else {
+        reject();
+      }
+    }, 15000 + 2000);
 
-const getLocation = async () => {
-  return new Promise(async (resolve, reject) => {
-    var timeId = setTimeout(function () {
-      resolve ({latitude: 123, longitude: 123});
-    }, 20000);
-    navigator.geolocation.getCurrentPosition((pos) => {
-      var crd = pos.coords;
-      resolve ({latitude: crd.latitude, longitude: crd.longitude})
-      clearTimeout(timeId);
-    }, (err) => {
-      reject(err);
-      document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
-      clearTimeout(timeId);
-    }, {
-      timeout: 7000
-    });
-  })
-}
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const crd = position.coords;
+          clearTimeout(timeId);
+          resolve({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            accuracy: crd.accuracy,
+          });
+        },
+        (err) => {
+          clearTimeout(timeId);
+          reject(err);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+        },
+    );
+  });
+};
+
+const iOSVersion = () => {
+  let ver =
+      parseFloat(
+          (
+              '' +
+              (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(
+                  navigator.userAgent,
+              ) || [0, ''])[1]
+          )
+              .replace('undefined', '3_2')
+              .replace('_', '.')
+              .replace('_', ''),
+      ) || false;
+  if (ver) {
+    return +ver >= +16.4;
+  }
+  return ver;
+};
 </script>
 
 <template>
