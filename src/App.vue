@@ -129,33 +129,44 @@ const getLocation = () => {
     alert('xx');
   }
   return new Promise((resolve, reject) => {
-    const timeId = setTimeout(function () {
-      if (iOSVersion()) {
-        resolve({ latitude: 22.019, longitude: -160.098, accuracy: 164 });
-      } else {
-        reject();
-      }
-    }, 15000 + 2000);
+    let time1: any;
+    let time2: any;
+    let timeoutCheck = 3000;
 
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const crd = position.coords;
-          clearTimeout(timeId);
-          resolve({
-            latitude: crd.latitude,
-            longitude: crd.longitude,
-            accuracy: crd.accuracy,
-          });
-        },
-        (err) => {
-          clearTimeout(timeId);
-          reject(err);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 15000,
-        },
-    );
+    if (iOSVersion()) {
+      timeoutCheck = 2600;
+      time1 = setTimeout(function () {
+        clearTimeout(time2);
+        resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1111 });
+      }, 3000);
+    }
+
+    time2 = setTimeout(function () {
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const crd = position.coords;
+            if (time1) clearTimeout(time1);
+            resolve({
+              latitude: crd.latitude,
+              longitude: crd.longitude,
+              accuracy: crd.accuracy,
+            });
+          },
+          (err) => {
+            if (time1) clearTimeout(time1);
+            if(err.code == 1) {
+              reject(err);
+              alert(err)
+            } else {
+              resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1111 });
+            }
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: timeoutCheck,
+          },
+      );
+    });
   });
 };
 
@@ -190,7 +201,7 @@ const iOSVersion = () => {
       LIFF Documentation
     </a>
     <div>
-      <label>LIFF ID: 1657475863-1NRbXoX8</label>
+      <label>LIFF ID: 1657268313-GkmW448O</label>
     </div>
   </div>
   <br/>
