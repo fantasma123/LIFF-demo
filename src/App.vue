@@ -127,50 +127,48 @@ const delay = (delayInms) => {
 const getLocation = () => {
   alert(iOSVersion());
   return new Promise((resolve, reject) => {
-    return new Promise((resolve, reject) => {
-      let time1;
-      let time2;
-      let timeoutCheck = 3000;
-      let timeout1= 4000;
-      let code = 1112;
+    let time1;
+    let time2;
+    let timeoutCheck = 3000;
+    let timeout1 = 4000;
+    let code = 1112;
 
-      if (iOSVersion() != 0) {
-        if (iOSVersion() >= 16.4) {
-          code = 1111;
-          timeout1 = 3000;
-          timeoutCheck = 2500;
-        }
-        time1 = setTimeout(function () {
-          clearTimeout(time2);
-          resolve({ latitude: 22.019, longitude: -160.098, accuracy: code });
-        }, timeout1);
+    if (iOSVersion() != 0) {
+      if (iOSVersion() >= 16.4) {
+        code = 1111;
+        timeout1 = 3000;
+        timeoutCheck = 2500;
       }
+      time1 = setTimeout(function () {
+        clearTimeout(time2);
+        resolve({latitude: 22.019, longitude: -160.098, accuracy: code});
+      }, timeout1);
+    }
 
-      time2 = setTimeout(function () {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const crd = position.coords;
-              if (time1) clearTimeout(time1);
-              resolve({
-                latitude: crd.latitude,
-                longitude: crd.longitude,
-                accuracy: crd.accuracy,
-              });
-            },
-            (err) => {
-              if (time1) clearTimeout(time1);
-              if (err.code == 1) {
-                reject(err);
-              } else {
-                resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1113 });
-              }
-            },
-            {
-              enableHighAccuracy: true,
-              timeout: timeoutCheck,
-            },
-        );
-      });
+    time2 = setTimeout(function () {
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const crd = position.coords;
+            if (time1) clearTimeout(time1);
+            resolve({
+              latitude: crd.latitude,
+              longitude: crd.longitude,
+              accuracy: crd.accuracy,
+            });
+          },
+          (err) => {
+            if (time1) clearTimeout(time1);
+            if (err.code == 1) {
+              reject(err);
+            } else {
+              resolve({latitude: 22.019, longitude: -160.098, accuracy: 1113});
+            }
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: timeoutCheck,
+          },
+      );
     });
   });
 };
