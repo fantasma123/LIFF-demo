@@ -128,8 +128,8 @@ const getLocation = () => {
   alert(iOSVersion());
   return new Promise((resolve, reject) => {
     return new Promise((resolve, reject) => {
-      let time1: any;
-      let time2: any;
+      let time1;
+      let time2;
       let timeoutCheck = 3000;
       let timeout1= 4000;
       let code = 1112;
