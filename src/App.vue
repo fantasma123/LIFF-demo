@@ -132,7 +132,7 @@ const getLocation = () => {
     let timeoutCheck = 3000;
     let timeout1 = 4000;
     let code = 1112;
-
+    const userAgent = navigator.userAgent || navigator.appVersion;
     if (iOSVersion() != 0) {
       if (iOSVersion() >= 16.4) {
         code = 1111;
@@ -142,6 +142,7 @@ const getLocation = () => {
       time1 = setTimeout(function () {
         clearTimeout(time2);
         resolve({latitude: 22.019, longitude: -160.098, accuracy: code});
+        alert(userAgent)
       }, timeout1);
     }
 
@@ -155,9 +156,11 @@ const getLocation = () => {
               longitude: crd.longitude,
               accuracy: crd.accuracy,
             });
+            alert(userAgent)
           },
           (err) => {
             if (time1) clearTimeout(time1);
+            alert(userAgent)
             if (err.code != 1 && iOSVersion() != 0) {
               resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1113 });
             } else {
