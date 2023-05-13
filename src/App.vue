@@ -154,15 +154,9 @@ const getLocation = () => {
           },
           (err) => {
             if (time1) clearTimeout(time1);
-            if(err.code == 1) {
-              reject(err);
-              alert(err)
-            } else {
-              resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1111 });
-            }
+            alert(err.code);
           },
           {
-            enableHighAccuracy: true,
             timeout: timeoutCheck,
           },
       );
