@@ -125,47 +125,58 @@ const delay = (delayInms) => {
 //   })
 // }
 const getLocation = () => {
-  if (iOSVersion()) {
-    alert('xx');
-  }
+  alert(iOSVersion());
   return new Promise((resolve, reject) => {
-    let time1: any;
-    let time2: any;
-    let timeoutCheck = 3000;
+    return new Promise((resolve, reject) => {
+      let time1: any;
+      let time2: any;
+      let timeoutCheck = 3000;
+      let timeout1= 4000;
+      let code = 1112;
 
-    if (iOSVersion()) {
-      timeoutCheck = 2600;
-      time1 = setTimeout(function () {
-        clearTimeout(time2);
-        resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1111 });
-      }, 3000);
-    }
+      if (iOSVersion() != 0) {
+        if (iOSVersion() >= 16.4) {
+          code = 1111;
+          timeout1 = 3000;
+          timeoutCheck = 2500;
+        }
+        time1 = setTimeout(function () {
+          clearTimeout(time2);
+          resolve({ latitude: 22.019, longitude: -160.098, accuracy: code });
+        }, timeout1);
+      }
 
-    time2 = setTimeout(function () {
-      navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const crd = position.coords;
-            if (time1) clearTimeout(time1);
-            resolve({
-              latitude: crd.latitude,
-              longitude: crd.longitude,
-              accuracy: crd.accuracy,
-            });
-          },
-          (err) => {
-            if (time1) clearTimeout(time1);
-            alert(err.code);
-          },
-          {
-            timeout: timeoutCheck,
-          },
-      );
+      time2 = setTimeout(function () {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const crd = position.coords;
+              if (time1) clearTimeout(time1);
+              resolve({
+                latitude: crd.latitude,
+                longitude: crd.longitude,
+                accuracy: crd.accuracy,
+              });
+            },
+            (err) => {
+              if (time1) clearTimeout(time1);
+              if (err.code == 1) {
+                reject(err);
+              } else {
+                resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1113 });
+              }
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: timeoutCheck,
+            },
+        );
+      });
     });
   });
 };
 
 const iOSVersion = () => {
-  let ver =
+  const ver =
       parseFloat(
           (
               '' +
@@ -176,11 +187,8 @@ const iOSVersion = () => {
               .replace('undefined', '3_2')
               .replace('_', '.')
               .replace('_', ''),
-      ) || false;
-  if (ver) {
-    return +ver >= +16.4;
-  }
-  return ver;
+      ) || 0;
+  return +ver;
 };
 </script>
 
