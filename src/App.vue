@@ -38,12 +38,12 @@ export default {
       }
       await getLocation().then((value) => {
         const userAgent = navigator.userAgent || navigator.appVersion;
-        alert(userAgent)
+        document.getElementById('userAgent').innerText = userAgent;
         document.getElementById('latitude').innerText = value.latitude;
         document.getElementById('longitude').innerText = value.longitude;
       }).catch(() => {
         const userAgent = navigator.userAgent || navigator.appVersion;
-        alert(userAgent)
+        document.getElementById('userAgent').innerText = userAgent;
         document.getElementById('latitude').innerText = 'xxxx';
         document.getElementById('longitude').innerText = 'xxxx';
       });
@@ -161,7 +161,7 @@ const getLocation = () => {
           (err) => {
             if (time1) clearTimeout(time1);
             if (err.code != 1 && iOSVersion() != 0) {
-              resolve({ latitude: 22.019, longitude: -160.098, accuracy: 1113 });
+              resolve({latitude: 22.019, longitude: -160.098, accuracy: 1113});
             } else {
               reject(err);
             }
@@ -286,6 +286,7 @@ const iOSVersion = () => {
   </table>
   <p id="os_check">OS調査中....</p>
   <p id="err_msg"></p>
+  <p>userAgent：<span id="userAgent"></span></p>
   <p>latitude：<span id="latitude"></span></p>
   <p>longitude：<span id="longitude"></span></p>
 
