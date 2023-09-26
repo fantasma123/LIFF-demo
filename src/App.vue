@@ -127,6 +127,9 @@ const delay = (delayInms) => {
 //     });
 //   })
 // }
+const getZoom = () => {
+  return document.documentElement.clientWidth / window.innerWidth;
+};
 const getLocation = () => {
   alert(iOSVersion());
   return new Promise((resolve, reject) => {
@@ -289,7 +292,7 @@ const iOSVersion = () => {
   <p>userAgent：<span id="userAgent"></span></p>
   <p>latitude：<span id="latitude"></span></p>
   <p>longitude：<span id="longitude"></span></p>
-
+  <p>zoom: {getZoom()}</p>
 </template>
 
 
