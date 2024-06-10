@@ -272,9 +272,9 @@ const iOSVersion = () => {
         </tr>-->
     <tr>
       <td><span>Response</span></td>
-      <td><input v-model="items.accessToken" type="text"/></td>
+      <td><input id='accessToken' v-model="items.accessToken" type="text"/></td>
     </tr>
-    <tr>
+<!--    <tr>
       <td><span>permissions</span></td>
       <td><input v-model="items.permissions" type="text"/></td>
     </tr>
@@ -285,14 +285,14 @@ const iOSVersion = () => {
     <tr>
       <td><span>ver</span></td>
       <td><input v-model="items.ver" type="text"/></td>
-    </tr>
+    </tr>-->
   </table>
-  <p id="os_check">OS調査中....</p>
+  <!--<p id="os_check">OS調査中....</p>
   <p id="err_msg"></p>
   <p>userAgent：<span id="userAgent"></span></p>
   <p>latitude：<span id="latitude"></span></p>
   <p>longitude：<span id="longitude"></span></p>
-  <p>zoom: <span id='zoom'></span></p>
+  <p>zoom: <span id='zoom'></span></p>-->
 </template>
 
 
