@@ -28,29 +28,6 @@ export default {
               .replace('_', '')
       ) || false;
     }
-
-    async function check() {
-      var os = getiOSVersion();
-      if (os) {
-        document.getElementById('os_check').innerText = "あなたはiOS" + os + "です";
-      } else {
-        document.getElementById('os_check').innerText = "あなたはAndroidです";
-      }
-      await getLocation().then((value) => {
-        const userAgent = navigator.userAgent || navigator.appVersion;
-        document.getElementById('userAgent').innerText = userAgent;
-        document.getElementById('latitude').innerText = value.latitude;
-        document.getElementById('longitude').innerText = value.longitude;
-      }).catch(() => {
-        const userAgent = navigator.userAgent || navigator.appVersion;
-        document.getElementById('userAgent').innerText = userAgent;
-        document.getElementById('latitude').innerText = 'xxxx';
-        document.getElementById('longitude').innerText = 'xxxx';
-      });
-      alert('end');
-    }
-
-    check();
   },
   methods: {
     liffStart: function (liffId) {
