@@ -85,25 +85,7 @@ const delay = (delayInms) => {
     }, delayInms + 1000);
   });
 };
-//
-// const getLocation = async () => {
-//   return new Promise(async (resolve, reject) => {
-//     var timeId = setTimeout(function () {
-//       resolve ({latitude: 123, longitude: 123});
-//     }, 20000);
-//     navigator.geolocation.getCurrentPosition((pos) => {
-//       var crd = pos.coords;
-//       resolve ({latitude: crd.latitude, longitude: crd.longitude})
-//       clearTimeout(timeId);
-//     }, (err) => {
-//       reject(err);
-//       document.getElementById('err_msg').innerText = 'ERROR(' + err.code + '): ' + err.message;
-//       clearTimeout(timeId);
-//     }, {
-//       timeout: 7000
-//     });
-//   })
-// }
+
 const getZoom = () => {
   document.getElementById('zoom').innerText = document.documentElement.clientWidth / window.innerWidth;
 };
